@@ -1,17 +1,12 @@
 import pygame
 
+from connection.client import Client
+
 
 def main():
-  pygame.init()
-  screen = pygame.display.set_mode((800, 800))
-  done = False
+    client = Client('localhost', 65432)
 
-  while not done:
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        done = True
-
-
+    client.start_connection()
 
 if __name__ == "__main__":
-	main()
+    main()
