@@ -12,6 +12,15 @@ class Client:
 
         self.socket = socket(AF_INET, SOCK_STREAM)
 
+    def __start_server(self):
+        self.socket.bind((self.ip, self.port))
+        self.socket.listen()
+        print('Aguardando .......')
+        connection, address = self.socket.accept()
+        if connection:
+            print('Conectado a:', address)
+            self.socket = connection
+
     def receive(self):
         receive_message = self.socket.recv(2048).decode()
         if not receive_message == '':
@@ -27,18 +36,7 @@ class Client:
     def start_connection(self):
         try:
             self.socket.connect((self.ip, self.port))
-            self.send('agora foi')
         except:
             self.close()
             self.socket = socket(AF_INET, SOCK_STREAM)
-            self.start_server()
-
-    def start_server(self):
-        self.socket.bind((self.ip, self.port))
-        self.socket.listen()
-        print('Aguardando .......')
-        connection, address = self.socket.accept()
-        if connection:
-            print('Conectado a:', address)
-            self.socket = connection
-
+            self.__start_server()
