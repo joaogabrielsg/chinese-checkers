@@ -8,10 +8,12 @@ WHITE = (255, 255, 255)
 
 
 class Cell(GameObject):
-    def __init__(self, color, position, size):
+    def __init__(self, color, position, size, neighbors, line_number):
         GameObject.__init__(self, position, pygame.Rect(position[0] - size / 2, position[1] - size / 2, size, size))
         self.size = size
         self.color = color
+        self.neighbors = neighbors
+        self.line_number = line_number
 
     def set_color(self, new_color):
         self.color = new_color
