@@ -61,7 +61,7 @@ class Game:
             # ao fim do desenho temos que trocar o front buffer e o back buffer
             pygame.display.flip()
 
-            print("FPS: %0.2f" % clock.get_fps())
+            # print("FPS: %0.2f" % clock.get_fps())
 
     def stop(self):
         self.run = False

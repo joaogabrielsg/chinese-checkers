@@ -1,6 +1,5 @@
-from connection.client import Client
 from game.game import Game
-from components.cell import Cell
+from containers.table import Table
 
 
 def main():
@@ -8,10 +7,11 @@ def main():
     #
     # client.start_connection()
 
-    game = Game((400, 400), 'teste', False)
-    pin = Cell((255, 255, 255), (100, 100), 50)
+    game = Game((1200, 700), 'Chinese Checkers', False)
+    # pin = Cell((255, 255, 255), (100, 100), 50)
+    table = Table((600, 100))
 
-    game.add_component(pin)
+    table.render(game)
 
     game.start()
 

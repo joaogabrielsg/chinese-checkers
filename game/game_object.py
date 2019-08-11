@@ -3,7 +3,7 @@ from pygame.locals import *
 
 
 class GameObject(pygame.sprite.Sprite):
-    def __init__(self, position, collision_rect):
+    def __init__(self, position, collision_rect=pygame.Rect(0, 0, 0, 0)):
         pygame.sprite.Sprite.__init__(self)
 
         self.collision_rect = collision_rect
