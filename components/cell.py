@@ -6,6 +6,7 @@ GREEN = (0, 128, 0)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 
+
 class Cell(GameObject):
     def __init__(self, color, position, size):
         GameObject.__init__(self, position, pygame.Rect(position[0] - size / 2, position[1] - size / 2, size, size))

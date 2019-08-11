@@ -1,0 +1,64 @@
+{
+  "cells_list": [
+    {
+      "id": 0,
+      "neighbors": [1, 2],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 1,
+      "neighbors": [0, 2, 3, 4],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 2,
+      "neighbors": [0, 1, 4, 5],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 3,
+      "neighbors": [1, 2],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 4,
+      "neighbors": [1, 2],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 5,
+      "neighbors": [1, 2],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 6,
+      "neighbors": [1, 2],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 7,
+      "neighbors": [0, 2, 3, 4],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 8,
+      "neighbors": [0, 1, 4, 5],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 9,
+      "neighbors": [1, 2],
+      "default_color": "(0, 128, 0)"
+    },
+    {
+      "id": 10,
+      "neighbors": [1, 2],
+      "default_color": "(255, 255, 255)"
+    },
+    {
+      "id": 11,
+      "neighbors": [1, 2],
+      "default_color": "(255, 255, 255)"
+    }
+  ]
+}
