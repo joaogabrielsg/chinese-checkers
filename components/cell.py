@@ -2,7 +2,7 @@ import pygame
 from game.game_object import GameObject
 
 
-GREEN = (0, 128, 0)
+GREEN = (53, 204, 53)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 
