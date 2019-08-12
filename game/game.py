@@ -40,28 +40,31 @@ class Game:
         for component in self.components:
             component.render(self.screen)
 
-    def __components_update(self, dt):
+    def __components_update(self):
+        events = pygame.event.get()
         for component in self.components:
-            component.update(self.screen, dt)
+            component.update(self.screen, events)
 
     def start(self):
         # frames por segundo do jogo
         clock = pygame.time.Clock()
-        dt = 16
 
         self.run = True
         while self.run:
-            clock.tick(1000 / dt)
+            # clock.tick(1000 / dt)
 
             self.screen.fill(self.background_color)
+            self.__components_update()
             self.__handle_events()
             self.__components_render()
-            self.__components_update(dt)
 
             # ao fim do desenho temos que trocar o front buffer e o back buffer
-            pygame.display.flip()
+            # pygame.display.flip()
 
             # print("FPS: %0.2f" % clock.get_fps())
+
+            pygame.display.update()
+            clock.tick(30)
 
     def stop(self):
         self.run = False
