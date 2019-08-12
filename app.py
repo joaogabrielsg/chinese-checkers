@@ -1,7 +1,6 @@
 import pygame
 from game.game import Game
-from containers.table import Table
-from containers.start_connection import StartConnection
+from router.navigation import Navigator
 
 
 def main():
@@ -12,13 +11,16 @@ def main():
     #
     # client.start_connection()
 
-    table = StartConnection((600, 200))
-
-    table.render(game)
+    # table = StartConnection((600, 200))
+    #
+    # table.render(game)
 
     # table = Table((600, 100))
     #
     # table.render(game)
+
+    navigator = Navigator(game)
+    navigator.navigate('start_connection')
 
     game.start()
 

@@ -71,3 +71,6 @@ class Game:
 
     def add_component(self, component):
         self.components.append(component)
+
+    def clear_screen(self):
+        self.components = []
