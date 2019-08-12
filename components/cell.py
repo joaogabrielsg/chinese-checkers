@@ -27,11 +27,6 @@ class Cell(GameObject):
         else:
             self.set_color(GREEN)
 
-    @staticmethod
-    def render_component(screen, color, position, size):
-        cell = Cell(color, position, size)
-        cell.render(screen)
-
     def render(self, screen):
         position = self.get_position()
         size = self.size

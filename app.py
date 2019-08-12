@@ -1,17 +1,24 @@
+import pygame
 from game.game import Game
 from containers.table import Table
+from containers.start_connection import StartConnection
 
 
 def main():
+    pygame.font.init()
+    game = Game((1200, 700), 'Chinese Checkers', False)
+
     # client = Client('localhost', 65432)
     #
     # client.start_connection()
 
-    game = Game((1200, 700), 'Chinese Checkers', False)
-    # pin = Cell((255, 255, 255), (100, 100), 50)
-    table = Table((600, 100))
+    table = StartConnection((600, 200))
 
     table.render(game)
+
+    # table = Table((600, 100))
+    #
+    # table.render(game)
 
     game.start()
 

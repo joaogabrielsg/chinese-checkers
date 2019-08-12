@@ -43,7 +43,7 @@ class Table(GameObject):
     @staticmethod
     def import_file(path):
         try:
-            json_file = open('table_cells.json')
+            json_file = open(path)
             return json.load(json_file)['cells_list']
 
         except:
