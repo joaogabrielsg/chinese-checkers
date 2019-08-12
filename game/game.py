@@ -19,7 +19,9 @@ class Game:
         pygame.display.set_caption(title)
 
     def __handle_events(self):
-        for event in pygame.event.get():
+        events = pygame.event.get()
+        self.__components_update(events)
+        for event in events:
             if event.type in (KEYDOWN, KEYUP):
                 k = event.key
 
@@ -40,8 +42,7 @@ class Game:
         for component in self.components:
             component.render(self.screen)
 
-    def __components_update(self):
-        events = pygame.event.get()
+    def __components_update(self, events):
         for component in self.components:
             component.update(self.screen, events)
 
@@ -54,12 +55,11 @@ class Game:
             # clock.tick(1000 / dt)
 
             self.screen.fill(self.background_color)
-            self.__components_update()
             self.__handle_events()
             self.__components_render()
 
             # ao fim do desenho temos que trocar o front buffer e o back buffer
-            # pygame.display.flip()
+            pygame.display.flip()
 
             # print("FPS: %0.2f" % clock.get_fps())
 

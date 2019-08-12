@@ -9,12 +9,17 @@ class TextInput(GameObject):
         self.textinput = TextInputCustom(text_color=(255, 255, 255), cursor_color=(255, 255, 255))
         self.position = position
 
+        self.text = ''
+
     def on_click(self):
         pass
 
+    def get_text(self):
+        return self.text
+
     def update(self, screen, events):
-        print(events)
         self.textinput.update(events)
+        self.text = self.textinput.get_text()
 
     def render(self, screen):
         screen.blit(self.textinput.get_surface(), self.position)

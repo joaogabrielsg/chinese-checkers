@@ -10,12 +10,13 @@ class StartConnection(GameObject):
         self.position = position
         self.cells = []
 
+        self.text_input = TextInput((self.position[0], self.position[1] - 100), 100)
+
     def on_connect(self):
-        print('Clicou')
+        print('==========')
+        print(self.text_input.get_text())
 
     def render(self, game):
-        button = Button((self.position[0], self.position[1] + 100), 100, 'Connectar', self.on_connect)
-        text_input = TextInput((self.position[0], self.position[1] - 100), 100)
-
-        game.add_component(text_input)
-        game.add_component(button)
+        self.button = Button((self.position[0], self.position[1] + 100), 100, 'Connectar', self.on_connect)
+        game.add_component(self.text_input)
+        game.add_component(self.button)

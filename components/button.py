@@ -10,6 +10,16 @@ class Button(GameObject):
         self.title = title
         self.onClick = onClick
 
+        self.vertices = [(position[0] - size, position[1] - size / 2),
+                         (position[0] - size, position[1] + size / 2),
+                         (position[0] + size, position[1] + size / 2),
+                         (position[0] + size, position[1] - size / 2)]
+
+        font = pygame.font.SysFont('Comic Sans MS', 30)
+        self.text = font.render(self.title, True, (0, 0, 0))
+        self.textRect = self.text.get_rect()
+        self.textRect.center = self.position
+
     def set_color(self, new_color):
         self.color = new_color
 
@@ -20,23 +30,5 @@ class Button(GameObject):
         self.onClick()
 
     def render(self, screen):
-        position = self.get_position()
-        size = self.size
-        vertices = [(position[0] - size, position[1] - size / 2),
-                    (position[0] - size, position[1] + size / 2),
-                    (position[0] + size, position[1] + size / 2),
-                    (position[0] + size, position[1] - size / 2)]
-
-        pygame.draw.polygon(screen, self.color, vertices)
-
-        font = pygame.font.SysFont('Comic Sans MS', 30)
-        text = font.render(self.title, True, (0, 0, 0))
-        textRect = text.get_rect()
-        textRect.center = self.position
-
-        screen.blit(text, textRect)
-
-
-
-
-
+        pygame.draw.polygon(screen, self.color, self.vertices)
+        screen.blit(self.text, self.textRect)
