@@ -1,4 +1,5 @@
 from socket import *
+import pickle
 import threading
 
 IP = '127.0.0.1'  # Standard loopback interface address (localhost)
@@ -6,9 +7,11 @@ PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
 
 class Client:
-    def __init__(self):
+    def __init__(self, game_data):
         self.ip = None
         self.port = None
+
+        self.game_data = game_data
 
         self.socket = socket(AF_INET, SOCK_STREAM)
 
@@ -24,17 +27,16 @@ class Client:
             thread.start()
 
     def receive(self):
-        receive_message = self.socket.recv(2048).decode()
-        if not receive_message == '':
-            return receive_message
+        object_received = self.socket.recv(4096)
+        self.game_data = pickle.loads(object_received)
+        print(self.game_data.messages)
 
     def receive_thread(self):
         while True:
-            print(self.receive())
+            self.receive()
 
-    def send(self, message):
-        self.socket.send(message.encode())
-        self.socket.send(''.encode())
+    def send(self):
+        self.socket.send(pickle.dumps(self.game_data))
 
     def close(self):
         self.socket.close()

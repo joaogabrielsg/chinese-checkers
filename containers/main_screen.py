@@ -5,11 +5,11 @@ from components.button import Button
 
 class MainScreen(GameObject):
     def __init__(self, navigator, client):
-        self.table = Table((600, 100), navigator, client)
+        self.table = Table((400, 100), navigator, client)
         self.navigator = navigator
         self.client = client
 
-        self.button = Button((100, 100), 100, 'Sair', self.on_back)
+        self.button = Button((75, 50), 50, 'Sair', self.on_back)
 
     def on_back(self):
         self.client.close()

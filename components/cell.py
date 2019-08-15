@@ -8,12 +8,14 @@ WHITE = (255, 255, 255)
 
 
 class Cell(GameObject):
-    def __init__(self, color, position, size, neighbors, line_number):
+    def __init__(self, id, color, position, size, neighbors, line_number, onClick):
         GameObject.__init__(self, position, pygame.Rect(position[0] - size / 2, position[1] - size / 2, size, size))
+        self.id = id
         self.size = size
         self.color = color
         self.neighbors = neighbors
         self.line_number = line_number
+        self.onClick = onClick
 
     def set_color(self, new_color):
         self.color = new_color
@@ -22,10 +24,11 @@ class Cell(GameObject):
         pass
 
     def on_click(self):
-        if self.color == GREEN:
-            self.set_color(RED)
-        else:
-            self.set_color(GREEN)
+        self.onClick(self.id)
+        # if self.color == GREEN:
+        #     self.set_color(RED)
+        # else:
+        #     self.set_color(GREEN)
 
     def render(self, screen):
         position = self.get_position()

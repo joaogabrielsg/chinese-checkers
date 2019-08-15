@@ -1,13 +1,13 @@
 from containers.start_connection import StartConnection
 from containers.main_screen import MainScreen
-from connection.client import Client
+from connection.game_client import GameClient
 
 
 class Navigator:
     def __init__(self, game):
         self.current_page = ''
         self.game = game
-        self.client = Client()
+        self.client = GameClient()
 
     def start_page(self):
         table = StartConnection((600, 200), self, self.client)

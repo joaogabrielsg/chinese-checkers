@@ -22,22 +22,25 @@ class Table(GameObject):
         self.navigator = navigator
         self.client = client
 
+    def on_click(self, id):
+        self.client.send_message(id)
+
     def render_odd_line(self, game, cell_size, cells_list, line_height, line_number):
         for index, cell in enumerate(cells_list):
-            cell = Cell(eval(cell['default_color']), (
+            cell = Cell(cell['id'], eval(cell['default_color']), (
                 ((index - int(len(cells_list) / 2)) * (cell_size + SPACING_BETWEEN_CELLS)) + self.position[0],
                 line_height),
-                        cell_size, cell['neighbors'], line_number)
+                        cell_size, cell['neighbors'], line_number, self.on_click)
 
             self.cells.append(cell)
             game.add_component(cell)
 
     def render_par_line(self, game, cell_size, cells_list, line_height, line_number):
         for index, cell in enumerate(cells_list):
-            cell = Cell(eval(cell['default_color']), (
+            cell = Cell(cell['id'], eval(cell['default_color']), (
                 ((index - int(len(cells_list) / 2)) * (cell_size + SPACING_BETWEEN_CELLS)) + self.position[0] + (
                         cell_size / 2),
-                line_height), cell_size, cell['neighbors'], line_number)
+                line_height), cell_size, cell['neighbors'], line_number,  self.on_click)
 
             self.cells.append(cell)
             game.add_component(cell)
