@@ -7,11 +7,11 @@ PORT = 65432  # Port to listen on (non-privileged ports are > 1023)
 
 
 class Client:
-    def __init__(self, game_data):
+    def __init__(self, on_receive):
         self.ip = None
         self.port = None
 
-        self.game_data = game_data
+        self.on_receive = on_receive
 
         self.socket = socket(AF_INET, SOCK_STREAM)
 
@@ -28,15 +28,14 @@ class Client:
 
     def receive(self):
         object_received = self.socket.recv(4096)
-        self.game_data = pickle.loads(object_received)
-        print(self.game_data.messages)
+        self.on_receive(pickle.loads(object_received))
 
     def receive_thread(self):
         while True:
             self.receive()
 
-    def send(self):
-        self.socket.send(pickle.dumps(self.game_data))
+    def send(self, send_object):
+        self.socket.send(pickle.dumps(send_object))
 
     def close(self):
         self.socket.close()
