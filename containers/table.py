@@ -15,11 +15,12 @@ WHITE = (255, 255, 255)
 
 
 class Table(GameObject):
-    def __init__(self, position, navigator):
+    def __init__(self, position, navigator, client):
         GameObject.__init__(self, position)
         self.position = position
         self.cells = []
         self.navigator = navigator
+        self.client = client
 
     def render_odd_line(self, game, cell_size, cells_list, line_height, line_number):
         for index, cell in enumerate(cells_list):
