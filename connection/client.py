@@ -12,15 +12,21 @@ class Client:
         self.port = None
 
         self.on_receive = on_receive
+        self.status_text = ''
+        self.status_type = 0
 
         self.socket = socket(AF_INET, SOCK_STREAM)
 
     def __start_server(self):
         self.socket.bind((self.ip, self.port))
         self.socket.listen()
+        self.status_type = 0
+        self.status_text = 'Aguardando .......'
         print('Aguardando .......')
         connection, address = self.socket.accept()
         if connection:
+            self.status_text = 'Conectado'
+            self.status_type = 1
             print('Conectado a:', address)
             self.socket = connection
             thread = threading.Thread(target=self.receive_thread)
@@ -39,12 +45,16 @@ class Client:
 
     def close(self):
         self.socket.close()
+        self.status_text = 'Desconectado'
+        self.status_type = 2
 
     def start_connection(self, ip=IP, port=PORT):
         self.ip = ip
         self.port = port
         try:
             self.socket.connect((self.ip, self.port))
+            self.status_text = 'Conectado'
+            self.status_type = 1
             thread = threading.Thread(target=self.receive_thread)
             thread.start()
         except:

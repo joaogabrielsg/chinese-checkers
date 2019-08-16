@@ -9,11 +9,6 @@ class Text(GameObject):
         self.text_color = text_color
         self.title = title
 
-        font = pygame.font.SysFont('Comic Sans MS', 40)
-        self.text = font.render(self.title, True, text_color)
-        self.textRect = self.text.get_rect()
-        self.textRect.center = self.position
-
     def update(self, screen, dt):
         pass
 
@@ -21,4 +16,8 @@ class Text(GameObject):
         pass
 
     def render(self, screen):
-        screen.blit(self.text, self.textRect)
+        font = pygame.font.SysFont('Comic Sans MS', 40)
+        text = font.render(self.title, True, self.text_color)
+        text_rect = text.get_rect()
+        text_rect.center = self.position
+        screen.blit(text, text_rect)
