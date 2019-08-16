@@ -16,7 +16,6 @@ class Title(GameObject):
         pass
 
     def render(self, screen):
-        print(self.client.status_type)
         title_color = (255, 255, 255)
         if self.client.status_type == 0:
             title_color = (255, 255, 255)

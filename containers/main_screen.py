@@ -8,7 +8,7 @@ from components.title import Title
 class MainScreen(GameObject):
     def __init__(self, navigator, client):
         self.table = Table((400, 100), navigator, client)
-        self.chat = Chat((1000, 200), navigator, client)
+        self.chat = Chat((1000, 100), navigator, client)
         self.navigator = navigator
         self.client = client
 
@@ -21,5 +21,6 @@ class MainScreen(GameObject):
     def render(self, game):
         game.add_component(self.button)
         game.add_component(Title((600, 40), 100, self.navigator, self.client))
+
         self.table.render(game)
         self.chat.render(game)
