@@ -10,14 +10,14 @@ class Chat(GameObject):
         self.navigator = navigator
         self.client = client
 
-        self.button = Button((self.position[0] + 100, self.position[1] + 400), 50, 'Enviar', self.send_message)
-        self.text_input = TextInput((self.position[0] - 100, self.position[1] + 400), 100)
-        self.chat_messages = ChatMessages((self.position[0] + 100, self.position[1]), self.navigator, self.client)
+        self.button = Button((self.position[0] + 240, self.position[1] + 400), 50, 'Enviar', self.send_message)
+        self.text_input = TextInput((self.position[0] - 200, self.position[1] + 400), 100, 30)
+        self.chat_messages = ChatMessages((self.position[0], self.position[1]), self.navigator, self.client)
 
     def send_message(self):
         text = self.text_input.get_text()
-        self.client.send_message(text)
-        self.text_input.text = ''
+        self.text_input.clear()
+        self.client.send_message((self.client.client_type, text))
 
     def render(self, game):
         game.add_component(self.text_input)

@@ -4,15 +4,18 @@ from game.game_object import GameObject
 
 
 class TextInput(GameObject):
-    def __init__(self, position, size):
+    def __init__(self, position, size, font_size=35):
         GameObject.__init__(self, position, pygame.Rect(position[0] - size, position[1] - size / 2, size * 2, size))
-        self.textinput = TextInputCustom(text_color=(255, 255, 255), cursor_color=(255, 255, 255))
+        self.textinput = TextInputCustom(text_color=(255, 255, 255), cursor_color=(255, 255, 255), font_size=font_size)
         self.position = position
 
         self.text = ''
 
     def on_click(self):
         pass
+
+    def clear(self):
+        self.textinput.clear_text()
 
     def get_text(self):
         return self.text

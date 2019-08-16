@@ -1,6 +1,9 @@
 import pygame
 from game.game_object import GameObject
 
+GREEN = (53, 204, 53)
+RED = (219, 0, 5)
+
 
 class ChatMessages(GameObject):
     def __init__(self, position, navigator, client):
@@ -11,10 +14,9 @@ class ChatMessages(GameObject):
     def messages(self, screen):
         for index, message in enumerate(self.client.messages):
             font = pygame.font.SysFont('Comic Sans MS', 30)
-            text = font.render(message, True, (255, 255, 255))
-            text_rect = text.get_rect()
-            text_rect.center = (self.position[0], 40 + (index * 20))
-            screen.blit(text, text_rect)
+            text = message[0] + ': ' + message[1]
+            text_component = font.render(text, True, RED if message[0] == 'server' else GREEN)
+            screen.blit(text_component, (self.position[0] - 200, 80 + (index * 20)))
 
     def update(self, screen, dt):
         pass

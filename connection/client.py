@@ -12,6 +12,7 @@ class Client:
         self.port = None
 
         self.on_receive = on_receive
+        self.client_type = ''
         self.status_text = ''
         self.status_type = 0
 
@@ -27,6 +28,7 @@ class Client:
         if connection:
             self.status_text = 'Conectado'
             self.status_type = 1
+            self.client_type = 'server'
             print('Conectado a:', address)
             self.socket = connection
             thread = threading.Thread(target=self.receive_thread)
@@ -55,6 +57,7 @@ class Client:
             self.socket.connect((self.ip, self.port))
             self.status_text = 'Conectado'
             self.status_type = 1
+            self.client_type = 'client'
             thread = threading.Thread(target=self.receive_thread)
             thread.start()
         except:
