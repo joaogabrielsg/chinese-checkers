@@ -3,6 +3,7 @@ from containers.table import Table
 from containers.chat import Chat
 from components.button import Button
 from components.title import Title
+from components.title_turn import TitleTurn
 
 
 class MainScreen(GameObject):
@@ -21,6 +22,8 @@ class MainScreen(GameObject):
     def render(self, game):
         game.add_component(self.button)
         game.add_component(Title((600, 40), 100, self.navigator, self.client))
+
+        game.add_component(TitleTurn((600, 600), 100, self.navigator, self.client))
 
         self.table.render(game)
         self.chat.render(game)

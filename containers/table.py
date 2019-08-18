@@ -91,9 +91,6 @@ class Table(GameObject):
                 if opposite_jump_position:
                     if opposite_jump_position.color == WHITE:
                         self.cells_allowed.append(opposite_jump_position)
-
-        print(self.cells_allowed)
-
         for cell in self.cells_allowed:
             self.client.cells[cell.id].color = YELLOW
 
@@ -103,16 +100,17 @@ class Table(GameObject):
         self.cells_allowed = []
 
     def on_click(self, cell):
-        if self.cell_selected_id:
-            if cell.color == YELLOW:
-                self.clean_positions_allowed_to_move()
-                self.client.move_cell(self.cell_selected_id, cell.id)
+        if self.client.client_type == self.client.client_type_turn:
+            if self.cell_selected_id:
+                if cell.color == YELLOW:
+                    self.clean_positions_allowed_to_move()
+                    self.client.move_cell(self.cell_selected_id, cell.id)
 
-            self.clean_positions_allowed_to_move()
-            self.cell_selected_id = None
-        else:
-            self.cell_selected_id = cell.id
-            self.positions_allowed_to_move(cell.id)
+                self.clean_positions_allowed_to_move()
+                self.cell_selected_id = None
+            else:
+                self.cell_selected_id = cell.id
+                self.positions_allowed_to_move(cell.id)
 
     def render_odd_line(self, game, cells_list, line_height, line_number):
         for index, cell in enumerate(cells_list):
