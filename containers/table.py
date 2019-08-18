@@ -52,8 +52,50 @@ class Table(GameObject):
     def get_occupied_neighbors(self, cell_id):
         return list(filter(lambda cell: cell.color != WHITE, self.get_cell_neighbors(cell_id)))
 
+    def opposite_jump_position(self, cell_origin, cell_to_jump):
+        if cell_origin.line_number == cell_to_jump.line_number:
+            for cell in self.get_cell_neighbors(cell_to_jump.id):
+                if cell.line_number == cell_origin.line_number and cell.id != cell_origin.id:
+                    return cell
+        elif cell_origin.line_number < cell_to_jump.line_number:
+            if cell_origin.id == cell_to_jump.neighbors[0]:
+                for cell in self.get_cell_neighbors(cell_to_jump.id):
+                    if cell.line_number != cell_origin.line_number and cell.line_number != cell_to_jump.line_number and cell.id == \
+                            cell_to_jump.neighbors[-1]:
+                        return cell
+            else:
+                for cell in self.get_cell_neighbors(cell_to_jump.id):
+                    if cell.line_number != cell_origin.line_number and cell.line_number != cell_to_jump.line_number and cell.id != \
+                            cell_to_jump.neighbors[-1]:
+                        return cell
+
+        elif cell_origin.line_number > cell_to_jump.line_number:
+            if cell_origin.id == cell_to_jump.neighbors[-1]:
+                for cell in self.get_cell_neighbors(cell_to_jump.id):
+                    if cell.line_number != cell_origin.line_number and cell.line_number != cell_to_jump.line_number and cell.id == \
+                            cell_to_jump.neighbors[0]:
+                        return cell
+            else:
+                for cell in self.get_cell_neighbors(cell_to_jump.id):
+                    if cell.line_number != cell_origin.line_number and cell.line_number != cell_to_jump.line_number and cell.id != \
+                            cell_to_jump.neighbors[0]:
+                        return cell
+
     def positions_allowed_to_move(self, cell_id):
         self.cells_allowed = self.get_empty_neighbors(cell_id)
+        occupied_neighbors = self.get_occupied_neighbors(cell_id)
+
+        if len(occupied_neighbors) > 0:
+            for occupied_neighbor in occupied_neighbors:
+                opposite_jump_position = self.opposite_jump_position(self.client.cells[cell_id], occupied_neighbor)
+                if opposite_jump_position:
+                    if opposite_jump_position.color == WHITE:
+                        self.cells_allowed.append(opposite_jump_position)
+
+        print(self.cells_allowed)
+
+        for cell in self.cells_allowed:
+            self.client.cells[cell.id].color = YELLOW
 
     def clean_positions_allowed_to_move(self):
         for cell in self.cells_allowed:
@@ -71,8 +113,6 @@ class Table(GameObject):
         else:
             self.cell_selected_id = cell.id
             self.positions_allowed_to_move(cell.id)
-            for cell in self.cells_allowed:
-                self.client.cells[cell.id].color = YELLOW
 
     def render_odd_line(self, game, cells_list, line_height, line_number):
         for index, cell in enumerate(cells_list):
