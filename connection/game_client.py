@@ -1,5 +1,6 @@
 from connection.client import Client
 
+WHITE = (255, 255, 255)
 
 class GameClient(Client):
     def __init__(self):
@@ -22,6 +23,7 @@ class GameClient(Client):
         self.cells[id_destiny].color = color_origin
 
     def move_cell(self, id_origin, id_destiny):
+        print(id_origin, id_destiny)
         self.__update_cells(id_origin, id_destiny)
         self.send(('move_cell', (id_origin, id_destiny)))
 
