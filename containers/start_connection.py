@@ -27,7 +27,7 @@ class StartConnection(GameObject):
         thread = threading.Thread(target=self.connection, args=(text,))
         thread.start()
 
-        self.navigator.navigate('victory_screen')
+        self.navigator.navigate('main_screen')
 
     def render(self, game):
         game.add_component(self.text_input)
