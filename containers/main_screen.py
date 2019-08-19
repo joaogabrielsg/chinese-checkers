@@ -17,7 +17,7 @@ class MainScreen(GameObject):
         self.button_restart = Button((75, 150), 50, 'Reiniciar', self.on_restart_game)
 
     def on_back(self):
-        self.client.close()
+        self.client.on_close()
         self.navigator.navigate('start_connection')
 
     def on_restart_game(self):

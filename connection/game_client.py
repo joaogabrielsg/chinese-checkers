@@ -22,6 +22,9 @@ class GameClient(Client):
         elif object_received[0] == 'restart_game':
             self.__on_restart_game()
 
+        elif object_received[0] == 'on_close':
+            self.__on_close()
+
     def __update_cells(self, id_origin, id_destiny):
         color_origin = self.cells[id_origin].color
         color_destiny = self.cells[id_destiny].color
@@ -49,4 +52,12 @@ class GameClient(Client):
     def restart_game(self):
         self.__on_restart_game()
         self.send(('restart_game', None))
+
+    def __on_close(self):
+        self.status_text = 'Adversário desistiu!'
+        self.status_type = 0
+
+    def on_close(self):
+        self.send(('on_close', None))
+        self.close()
 
