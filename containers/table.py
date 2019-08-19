@@ -1,6 +1,6 @@
 from game.game_object import GameObject
 from components.cell import Cell
-import json
+from utils.utils import import_file
 
 TOTAL_CELLS = 121
 
@@ -13,16 +13,6 @@ GREEN = (53, 204, 53)
 RED = (219, 0, 5)
 WHITE = (255, 255, 255)
 YELLOW = (255, 217, 15)
-
-
-def import_file(path):
-    try:
-        json_file = open(path)
-        return json.load(json_file)['cells_list']
-
-    except:
-        print('Tem um problema com o arquivo JSON.')
-        return None
 
 
 class Table(GameObject):

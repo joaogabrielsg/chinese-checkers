@@ -1,4 +1,5 @@
 from connection.client import Client
+from utils.utils import import_file
 
 WHITE = (255, 255, 255)
 
@@ -18,6 +19,9 @@ class GameClient(Client):
             self.client_type_turn = self.client_type
             self.__update_cells(object_received[1][0], object_received[1][1])
 
+        elif object_received[0] == 'restart_game':
+            self.__on_restart_game()
+
     def __update_cells(self, id_origin, id_destiny):
         color_origin = self.cells[id_origin].color
         color_destiny = self.cells[id_destiny].color
@@ -36,3 +40,13 @@ class GameClient(Client):
     def send_message(self, message):
         self.__new_message(message)
         self.send(('new_message', message))
+
+    def __on_restart_game(self):
+        cell_list = import_file('table_cells.json')
+        for cell in cell_list:
+            self.cells[cell['id']].color = eval(cell['default_color'])
+
+    def restart_game(self):
+        self.__on_restart_game()
+        self.send(('restart_game', None))
+
