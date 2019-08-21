@@ -1,4 +1,5 @@
 from containers.start_connection import StartConnection
+from containers.input_ip import InputIp
 from containers.main_screen import MainScreen
 from connection.game_client import GameClient
 from containers.victory_screen import VictoryScreen
@@ -11,7 +12,11 @@ class Navigator:
         self.client = GameClient()
 
     def start_page(self):
-        table = StartConnection((600, 200), self, self.client)
+        table = InputIp((600, 200), self, self.client)
+        table.render(self.game)
+
+    def input_port(self, ip):
+        table = StartConnection((600, 200), ip, self, self.client)
         table.render(self.game)
 
     def victory_page(self):
@@ -22,11 +27,14 @@ class Navigator:
         main_screen = MainScreen(self, self.client)
         main_screen.render(self.game)
 
-    def navigate(self, page):
+    def navigate(self, page, params=None):
         self.game.clear_screen()
 
         if page == 'start_connection':
             self.start_page()
+
+        if page == 'input_port':
+            self.input_port(params)
 
         if page == 'victory_screen':
             self.victory_page()
