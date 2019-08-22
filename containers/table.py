@@ -90,7 +90,19 @@ class Table(GameObject):
         self.cells_allowed = []
 
     def user_won(self):
-        pass
+        if self.client.client_type == 'client':
+            for index in range(0, 10):
+                print(self.client.cells[index].id, self.client.cells[index].color)
+                if self.client.cells[index].color != RED:
+                    return False
+            return True
+
+        else:
+            for index in range(111, 121):
+                print(self.client.cells[index].id, self.client.cells[index].color)
+                if self.client.cells[index].color != GREEN:
+                    return False
+            return True
 
     def on_click(self, cell):
         user_color = RED if self.client.client_type == 'server' else GREEN
@@ -99,6 +111,8 @@ class Table(GameObject):
                 if cell.color == YELLOW:
                     self.clean_positions_allowed_to_move()
                     self.client.move_cell(self.cell_selected_id, cell.id)
+                    if self.user_won():
+                        self.navigator.navigate('victory_screen')
 
                 self.clean_positions_allowed_to_move()
                 self.cell_selected_id = None
