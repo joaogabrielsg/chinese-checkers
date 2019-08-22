@@ -9,7 +9,7 @@ from components.title_turn import TitleTurn
 class MainScreen(GameObject):
     def __init__(self, navigator, client):
         self.table = Table((350, 100), navigator, client)
-        self.chat = Chat((900, 100), navigator, client)
+        self.chat = Chat((900, 120), navigator, client)
         self.navigator = navigator
         self.client = client
 

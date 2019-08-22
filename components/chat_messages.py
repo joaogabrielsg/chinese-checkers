@@ -14,7 +14,7 @@ class ChatMessages(GameObject):
     def messages(self, screen):
         for index, message in enumerate(self.client.messages):
             font = pygame.font.SysFont('Comic Sans MS', 30)
-            text = message[0] + ': ' + message[1]
+            text = '> ' + message[0] + ': ' + message[1]
             text_component = font.render(text, True, RED if message[0] == 'server' else GREEN)
             screen.blit(text_component, (self.position[0] - 200, 80 + (index * 20)))
 
