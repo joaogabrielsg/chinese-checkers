@@ -89,7 +89,11 @@ class Table(GameObject):
             self.client.cells[cell.id].color = WHITE
         self.cells_allowed = []
 
+    def user_won(self):
+        pass
+
     def on_click(self, cell):
+        user_color = RED if self.client.client_type == 'server' else GREEN
         if self.client.client_type == self.client.client_type_turn:
             if self.cell_selected_id:
                 if cell.color == YELLOW:
@@ -98,7 +102,7 @@ class Table(GameObject):
 
                 self.clean_positions_allowed_to_move()
                 self.cell_selected_id = None
-            else:
+            elif cell.color == user_color:
                 self.cell_selected_id = cell.id
                 self.positions_allowed_to_move(cell.id)
 
