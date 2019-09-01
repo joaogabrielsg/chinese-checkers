@@ -1,3 +1,4 @@
 sockets
 pygame
 Pillow
+Pyro4

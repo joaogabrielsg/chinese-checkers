@@ -1,7 +1,8 @@
+import threading
 from containers.start_connection import StartConnection
 from containers.input_ip import InputIp
 from containers.main_screen import MainScreen
-from connection.game_client import GameClient
+from connection.rpc_game_client import GameClient
 from containers.victory_screen import VictoryScreen
 
 
@@ -10,6 +11,7 @@ class Navigator:
         self.current_page = ''
         self.game = game
         self.client = GameClient()
+        self.client.start_connection()
 
     def start_page(self):
         table = InputIp((600, 200), self, self.client)

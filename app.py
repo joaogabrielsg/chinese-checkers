@@ -8,7 +8,8 @@ def main():
     game = Game((1200, 650), 'Chinese Checkers', False)
 
     navigator = Navigator(game)
-    navigator.navigate('start_connection')
+    # navigator.navigate('start_connection')
+    navigator.navigate('main_screen')
 
     game.start()
 
