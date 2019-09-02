@@ -21,10 +21,14 @@ class GameClient(Client, object):
         self.cells[id_origin].color = color_destiny
         self.cells[id_destiny].color = color_origin
 
+    def client_turn(self):
+        self.client_type_turn = self.client_type
+
     def move_cell(self, id_origin, id_destiny):
         self.client_type_turn = 'server' if self.client_type == 'client' else 'client'
         self.update_cells(id_origin, id_destiny)
         self.enemy.update_cells(id_origin, id_destiny)
+        self.enemy.client_turn()
 
     def new_message(self, message):
         self.messages.append(message)
