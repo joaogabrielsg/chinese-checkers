@@ -19,18 +19,20 @@ class Client(object):
         self.enemy = None
 
     def register_on_server_name(self, register_name):
-        uri = self.daemon.register(self.game)
+        uri = self.daemon.register(Client)
         self.server_name.register(register_name, uri)
-
-    def start_connection(self):
-        greeting_maker = Pyro4.Proxy(SERVER_NAME)
-        print(greeting_maker)
-        if greeting_maker:
-            self.enemy = greeting_maker
-            self.register_on_server_name(SERVER_NAME)
-        else:
-            self.enemy = Pyro4.Proxy(CLIENT_NAME)
-            self.register_on_server_name(CLIENT_NAME)
 
         thread = threading.Thread(target=self.daemon.requestLoop)
         thread.start()
+
+    def start_connection(self):
+        try:
+            ns = self.server_name.lookup(SERVER_NAME)
+            self.register_on_server_name(CLIENT_NAME)
+            self.enemy = Pyro4.Proxy(SERVER_NAME)
+        except:
+            self.register_on_server_name(SERVER_NAME)
+            self.enemy = Pyro4.Proxy(CLIENT_NAME)
+
+    def teste(self):
+        print('teste')

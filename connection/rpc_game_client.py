@@ -1,3 +1,4 @@
+import Pyro4
 from connection.rpc_client import Client
 from utils.utils import import_file
 
