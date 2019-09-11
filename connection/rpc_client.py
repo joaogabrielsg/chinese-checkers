@@ -25,6 +25,10 @@ class Client(object):
         thread = threading.Thread(target=self.daemon.requestLoop)
         thread.start()
 
+    def close(self):
+        self.status_text = 'Desconectado'
+        self.status_type = 2
+
     def start_game(self, client_object): #start_game
         try:
             ns = self.server_name.lookup("checkers.server")

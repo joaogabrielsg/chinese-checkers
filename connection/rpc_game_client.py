@@ -46,10 +46,11 @@ class GameClient(Client, object):
         self.on_restart_game()
         self.enemy.on_restart_game()
 
-    def __on_close(self):
+    def on_finish(self):
         self.status_text = 'Adversário desistiu!'
         self.status_type = 0
+        self.close()
 
     def on_close(self):
-        self.enemy.__on_close()
-        # self.close()
+        self.enemy.on_finish()
+        self.close()
