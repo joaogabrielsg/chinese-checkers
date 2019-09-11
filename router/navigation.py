@@ -11,7 +11,7 @@ class Navigator:
         self.current_page = ''
         self.game = game
         self.client = GameClient()
-        self.client.start_connection(self.client)
+        self.client.start_game(self.client)
 
     def start_page(self):
         table = InputIp((600, 200), self, self.client)

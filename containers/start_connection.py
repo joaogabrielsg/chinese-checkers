@@ -23,7 +23,7 @@ class StartConnection(GameObject):
     def connection(self, port):
         print(port)
         print(eval(port))
-        self.client.start_connection(self.ip, eval(port))
+        self.client.start_game(self.ip, eval(port))
 
     def on_connect(self):
         port = self.text_input.get_text()

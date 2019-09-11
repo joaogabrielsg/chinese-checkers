@@ -25,7 +25,7 @@ class Client(object):
         thread = threading.Thread(target=self.daemon.requestLoop)
         thread.start()
 
-    def start_connection(self, client_object):
+    def start_game(self, client_object): #start_game
         try:
             ns = self.server_name.lookup("checkers.server")
             self.register_on_server_name("checkers.client", client_object)
