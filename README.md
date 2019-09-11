@@ -24,6 +24,14 @@ Now yout can start the game:
 
     (venv) $ python3 app.py 
 
+To start server name:
+
+    python -m Pyro4.naming
+
+To print server name list 
+
+    python -m Pyro4.nsc list
+
 
 ## Game Board
 
